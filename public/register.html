@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create an account - MongoDB Auth Demo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="shell">
+
+    <aside class="pipeline">
+      <h2>Where your data goes</h2>
+      <p>Each step lights up as the request travels.</p>
+
+      <div class="pipe-step" data-step="1"><span class="pipe-dot"></span><span class="pipe-name">Register form</span></div>
+      <div class="pipe-step" data-step="2"><span class="pipe-dot"></span><span class="pipe-name">JavaScript fetch()</span></div>
+      <div class="pipe-step" data-step="3"><span class="pipe-dot"></span><span class="pipe-name">Node.js / Express</span></div>
+      <div class="pipe-step" data-step="4"><span class="pipe-dot"></span><span class="pipe-name">Mongoose model</span></div>
+      <div class="pipe-step" data-step="5"><span class="pipe-dot"></span><span class="pipe-name">MongoDB Atlas</span></div>
+      <div class="pipe-step" data-step="6"><span class="pipe-dot"></span><span class="pipe-name">User document saved</span></div>
+    </aside>
+
+    <main class="card">
+      <span class="brand">MongoDB Auth Demo</span>
+
+      <h1>Create an account</h1>
+      <p class="lede">
+        Submitting this form writes one document into the
+        <strong>users</strong> collection of your Atlas database.
+      </p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Prince" autocomplete="name" />
+          <span class="hint" id="nameHint"></span>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="prince@example.com" autocomplete="email" />
+          <span class="hint" id="emailHint"></span>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="At least 6 characters" autocomplete="new-password" />
+          <span class="hint" id="passwordHint"></span>
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Type it again" autocomplete="new-password" />
+          <span class="hint" id="confirmHint"></span>
+        </div>
+
+        <button type="submit" id="registerBtn">Create account</button>
+      </form>
+
+      <div class="message" id="message"></div>
+
+      <p class="switch">
+        Already registered? <a href="index.html">Log in</a>
+      </p>
+    </main>
+
+  </div>
+
+  <script src="js/pipeline.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome - MongoDB Auth Demo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main class="dash card">
+    <span class="brand">Authenticated</span>
+
+    <!-- The name is filled in by js/dashboard.js -->
+    <h1 id="greeting">Welcome!</h1>
+    <p class="lede">
+      You are logged in. MongoDB connection and authentication are working.
+    </p>
+
+    <!-- A celebratory GIF. If it cannot load (no internet), the
+         CSS confetti below is shown instead. -->
+    <img
+      class="gif"
+      id="celebrationGif"
+      src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif"
+      alt="Animated celebration" />
+
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <div class="facts">
+      <div>Signed in as <span id="userEmail">-</span></div>
+      <div>User id in MongoDB <span id="userId">-</span></div>
+      <div>Password storage <span>bcrypt hash, never plain text</span></div>
+    </div>
+
+    <button class="ghost" id="logoutBtn">Log out</button>
+  </main>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

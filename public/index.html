@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Log in - MongoDB Auth Demo</title>
+
+  <!-- Fonts (optional: if you are offline the page still works, it just
+       falls back to your system font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="shell">
+
+    <!-- ===== Left rail: shows where your data travels ===== -->
+    <aside class="pipeline">
+      <h2>Where your data goes</h2>
+      <p>Each step lights up as the request travels.</p>
+
+      <div class="pipe-step" data-step="1"><span class="pipe-dot"></span><span class="pipe-name">Login form</span></div>
+      <div class="pipe-step" data-step="2"><span class="pipe-dot"></span><span class="pipe-name">JavaScript fetch()</span></div>
+      <div class="pipe-step" data-step="3"><span class="pipe-dot"></span><span class="pipe-name">Node.js / Express</span></div>
+      <div class="pipe-step" data-step="4"><span class="pipe-dot"></span><span class="pipe-name">Mongoose</span></div>
+      <div class="pipe-step" data-step="5"><span class="pipe-dot"></span><span class="pipe-name">MongoDB Atlas</span></div>
+      <div class="pipe-step" data-step="6"><span class="pipe-dot"></span><span class="pipe-name">Password verified</span></div>
+    </aside>
+
+    <!-- ===== The login card ===== -->
+    <main class="card">
+      <span class="brand">MongoDB Auth Demo</span>
+
+      <h1>Log in</h1>
+      <p class="lede">
+        Your email and password are checked against the user document
+        stored in MongoDB Atlas.
+      </p>
+
+      <!-- novalidate turns off the browser's own bubbles so our own
+           JavaScript messages are used instead -->
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="prince@example.com" autocomplete="email" />
+          <span class="hint" id="emailHint"></span>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Your password" autocomplete="current-password" />
+          <span class="hint" id="passwordHint"></span>
+        </div>
+
+        <button type="submit" id="loginBtn">Log in</button>
+      </form>
+
+      <div class="message" id="message"></div>
+
+      <p class="switch">
+        No account yet? <a href="register.html">Create one</a>
+      </p>
+    </main>
+
+  </div>
+
+  <script src="js/pipeline.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

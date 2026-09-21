@@ -1,0 +1,323 @@
+/* ============================================================
+   style.css  -  all the styling for every page
+   ------------------------------------------------------------
+   The look: a dark "database console" theme. The left rail draws
+   the journey of your data (browser -> fetch -> Express ->
+   Mongoose -> MongoDB) and each stage lights up while a request
+   is actually travelling, which is the point of the assignment.
+   ============================================================ */
+
+/* ---- 1. Design tokens -------------------------------------
+   CSS variables. Change a value here and it changes everywhere. */
+:root {
+  --ink: #0b1016;          /* page background        */
+  --panel: #121b24;        /* card background        */
+  --panel-soft: #18242f;   /* inputs, inner blocks   */
+  --line: #24343f;         /* borders                */
+  --text: #e8f0f5;         /* main text              */
+  --muted: #8ba0af;        /* secondary text         */
+  --leaf: #00ed64;         /* accent (MongoDB green) */
+  --leaf-dim: #0a3a24;     /* accent background      */
+  --danger: #ff7a7a;       /* error text             */
+  --radius: 14px;
+}
+
+/* ---- 2. Base ---------------------------------------------- */
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+  background-color: var(--ink);
+  /* A slow, quiet gradient glow behind everything. */
+  background-image:
+    radial-gradient(60rem 40rem at 15% -10%, #12312400 0%, #0b1016 70%),
+    radial-gradient(45rem 30rem at 85% 110%, #0e2a3a 0%, #0b1016 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+h1, h2, h3, .brand, .pipe-name, button {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+a { color: var(--leaf); }
+
+/* ---- 3. Layout: pipeline rail + card ----------------------- */
+.shell {
+  width: 100%;
+  max-width: 940px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+/* ---- 4. The data pipeline rail ----------------------------- */
+.pipeline {
+  border-left: 1px solid var(--line);
+  padding-left: 22px;
+}
+
+.pipeline h2 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.pipeline p {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pipe-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  transition: color 0.25s ease;
+}
+
+.pipe-dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Added by JavaScript while a request is in flight. */
+.pipe-step.is-active { color: var(--text); }
+.pipe-step.is-active .pipe-dot {
+  background: var(--leaf);
+  box-shadow: 0 0 0 4px rgba(0, 237, 100, 0.14);
+}
+.pipe-step.is-done .pipe-dot { background: var(--leaf); }
+.pipe-step.is-done { color: #b9cad6; }
+
+/* ---- 5. The auth card -------------------------------------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 34px 32px 30px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--leaf);
+  background: var(--leaf-dim);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 18px;
+}
+
+.card h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.card .lede {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 14.5px;
+  max-width: 46ch;
+}
+
+/* ---- 6. Form fields ---------------------------------------- */
+.field { margin-bottom: 16px; }
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13.5px;
+  color: #c3d3de;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.field input::placeholder { color: #61798a; }
+
+.field input:focus {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 3px rgba(0, 237, 100, 0.16);
+}
+
+/* Marked by JavaScript when a field fails validation. */
+.field input.invalid { border-color: var(--danger); }
+
+.field .hint {
+  display: block;
+  min-height: 16px;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: var(--danger);
+}
+
+/* ---- 7. Buttons -------------------------------------------- */
+button {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #04170d;
+  background: var(--leaf);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: filter 0.18s ease, transform 0.08s ease;
+}
+
+button:hover { filter: brightness(1.08); }
+button:active { transform: translateY(1px); }
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+/* ---- 8. Messages ------------------------------------------- */
+.message {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: none;           /* hidden until JavaScript fills it */
+}
+
+.message.show { display: block; }
+
+.message.error {
+  color: #ffd6d6;
+  background: rgba(255, 122, 122, 0.12);
+  border: 1px solid rgba(255, 122, 122, 0.35);
+}
+
+.message.success {
+  color: #c9ffe2;
+  background: rgba(0, 237, 100, 0.12);
+  border: 1px solid rgba(0, 237, 100, 0.35);
+}
+
+.switch {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---- 9. Dashboard ------------------------------------------ */
+.dash {
+  width: 100%;
+  max-width: 620px;
+  text-align: center;
+}
+
+.dash h1 {
+  font-size: 34px;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.dash .lede { margin-left: auto; margin-right: auto; }
+
+.gif {
+  width: 100%;
+  max-width: 340px;
+  margin: 6px auto 22px;
+  border-radius: 12px;
+  display: block;
+  border: 1px solid var(--line);
+}
+
+.facts {
+  text-align: left;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 22px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.facts div { padding: 3px 0; }
+.facts span { color: var(--text); }
+
+/* Fallback celebration if the GIF cannot load (e.g. no internet). */
+.confetti {
+  display: none;
+  height: 120px;
+  margin: 10px 0 22px;
+  position: relative;
+  overflow: hidden;
+}
+.confetti i {
+  position: absolute;
+  top: -12px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  animation: fall 2.4s linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(140px) rotate(300deg); opacity: 0.2; }
+}
+
+/* ---- 10. Responsive ---------------------------------------- */
+@media (max-width: 800px) {
+  .shell {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 440px;
+  }
+  /* On a phone the pipeline moves below the form and gets smaller. */
+  .pipeline {
+    order: 2;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding: 18px 0 0;
+  }
+  .card { padding: 26px 22px 24px; }
+  .card h1 { font-size: 24px; }
+}
+
+/* Respect the operating-system "reduce motion" setting. */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
